@@ -3,7 +3,7 @@
   "productName" : "IsDefinition",
   "version": "1.0.0",
   "description": "Simple app for training your brain.",
-  "main": "scripts/main.js",
+  "main": "scripts/main/main.js",
   "scripts": {
     "start": "electron-forge start",
     "package": "electron-forge package",
