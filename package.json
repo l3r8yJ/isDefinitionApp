@@ -1,0 +1,61 @@
+{
+  "name": "isdefinitionapp",
+  "productName" : "IsDefinition",
+  "version": "1.0.0",
+  "description": "Simple app for training your brain.",
+  "main": "scripts/main.js",
+  "scripts": {
+    "start": "electron-forge start",
+    "package": "electron-forge package",
+    "make": "electron-forge make",
+    "debug": "electron --inspect=5858 ."
+  },
+  "repository": {
+    "type": "git",
+    "url": "isDefinitonApp"
+  },
+  "keywords": [
+    "none"
+  ],
+  "author": "l3r8y",
+  "license": "ISC",
+  "devDependencies": {
+    "@electron-forge/cli": "^6.0.0-beta.63",
+    "@electron-forge/maker-deb": "^6.0.0-beta.63",
+    "@electron-forge/maker-rpm": "^6.0.0-beta.63",
+    "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
+    "@electron-forge/maker-zip": "^6.0.0-beta.63",
+    "electron": "^17.2.0"
+  },
+  "dependencies": {
+    "electron-builder": "^22.14.13",
+    "electron-squirrel-startup": "^1.0.0"
+  },
+  "config": {
+    "forge": {
+      "packagerConfig": {},
+      "makers": [
+        {
+          "name": "@electron-forge/maker-squirrel",
+          "config": {
+            "name": "isdefinitionapp"
+          }
+        },
+        {
+          "name": "@electron-forge/maker-zip",
+          "platforms": [
+            "darwin"
+          ]
+        },
+        {
+          "name": "@electron-forge/maker-deb",
+          "config": {}
+        },
+        {
+          "name": "@electron-forge/maker-rpm",
+          "config": {}
+        }
+      ]
+    }
+  }
+}
