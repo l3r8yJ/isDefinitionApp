@@ -2,7 +2,13 @@ const {
     app,
     BrowserWindow
 } = require('electron')
+require('@electron/remote/main').initialize()
+require('@electron/remote/main').enable(BrowserWindow)
+
 const path = require('path')
+
+const editPath = '../../windows/list.html'
+
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -13,11 +19,14 @@ function createWindow() {
             nodeIntegration: true,
             contextIsolation: false,
             // enablePremoteMode: true,
+            enableRemoteModule: true,
         }
     })
 
     win.loadFile('index.html')
+    win.webContents.openDevTools()
 }
+
 
 app.whenReady().then(() => {
     createWindow()
@@ -28,6 +37,7 @@ app.whenReady().then(() => {
         }
     })
 })
+
 
 app.on('window-all-closed', () => {
     if (process.platform !== 'darwin') {

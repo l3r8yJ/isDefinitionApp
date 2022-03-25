@@ -1,6 +1,6 @@
 {
   "name": "isdefinitionapp",
-  "productName" : "IsDefinition",
+  "productName": "IsDefinition",
   "version": "1.0.0",
   "description": "Simple app for training your brain.",
   "main": "scripts/main/main.js",
@@ -28,8 +28,12 @@
     "electron": "^17.2.0"
   },
   "dependencies": {
+    "@electron/remote": "^2.0.8",
+    "better-sqlite3-with-prebuilds": "^7.4.3",
     "electron-builder": "^22.14.13",
-    "electron-squirrel-startup": "^1.0.0"
+    "electron-squirrel-startup": "^1.0.0",
+    "express": "^4.17.3",
+    "mysql": "^2.18.1"
   },
   "config": {
     "forge": {

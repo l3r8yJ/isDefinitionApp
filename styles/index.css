@@ -8,7 +8,9 @@
     margin-left: 20px;
     left: 20%;
 }
-
+form {
+    display: inline-block;
+}
 .btn-new:hover {
     box-shadow: 0 0 0 2px white, 0 0 0 4px #3C82F8;
 }
