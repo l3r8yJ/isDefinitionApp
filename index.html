@@ -6,13 +6,20 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <title>IsDefinition</title>
+    <link rel="stylesheet" href="styles/index.css">
   </head>
   <body>
-    <h1>Hello World!</h1>
-    We are using Node.js <span id="node-version"></span>,
-    Chromium <span id="chrome-version"></span>,
-    and Electron <span id="electron-version"></span>.
-
+    <div class="user-container">
+      <h1 class="page-header">IsDefinition</h1>
+      <br>
+      <input class="text-input" type="text" value="Введите определение"/>
+    </div>
+    <br>
+    <div class="button-container">
+      <input type="button" class="btn-new" value="Подсказка"/>
+      <input type="button" class="btn-new" value="Ответ"/>
+    </div>
+  
     <script src="./renderer.js"></script>
   </body>
 </html>

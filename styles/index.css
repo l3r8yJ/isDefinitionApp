@@ -1,0 +1,37 @@
+.btn-new {
+    border-radius: 10px;
+    color: white;
+    transition: .2s linear;
+    background: #0B63F6;
+    text-align: center;
+    font-size: 30px;
+    margin-left: 20px;
+    left: 20%;
+}
+
+.btn-new:hover {
+    box-shadow: 0 0 0 2px white, 0 0 0 4px #3C82F8;
+}
+
+h1 {
+    font-family: 'Merriweather', serif;
+    font-size: 50px;
+    letter-spacing: 1px;
+    max-width: 320px;
+    width: 100%;
+    align-items: center;
+    display: inline-block;
+    color: #000000;
+  }
+
+.text-input {
+    text-align: left;
+    font-size: 20px;
+    position: relative;
+}
+
+.text-input {
+    left: 20%;
+    right: auto;
+    width: 60%;
+}
