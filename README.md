@@ -1,4 +1,4 @@
-# IsDefinition README
+# README
 
 ## **IsDefinition** - is a simple app that makes it easy to memorize your definitions.
 
