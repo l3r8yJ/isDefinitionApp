@@ -1,7 +1,7 @@
-function compare() {
-
+function openWindow() {
+    window.open('../windows/list.html', '_blank', frame = false, nodeIntegration = true);
 }
 
-document.getElementById('btn-help').addEventListener('click', () => {
-    compare();
+document.getElementById('btn-add').addEventListener('click', () => {
+    openWindow()
 })
