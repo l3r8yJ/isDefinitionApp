@@ -16,8 +16,8 @@
 >
 >- `npm run make`
 >
->Change directory to out -> Your OS folder
+>Change directory to out/your OS folder/
 >
->- `cd out/yourfolder`
+>- `cd out/yourfolder/`
 >
 > There will be an executable file in this folder 
