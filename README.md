@@ -16,7 +16,7 @@
 >
 >- `npm run make`
 >
->Change directory to out/your OS folder/
+>Change directory to *out/your OS folder/
 >
 >- `cd out/yourfolder/`
 >
