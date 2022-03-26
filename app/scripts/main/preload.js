@@ -2,7 +2,7 @@ const path = require('path');
 const fs = require('fs');
 let globalContent = '';
 
-function parseToDefinitionAndText() {
+function parseToDictionary() {
     let data = {};
 
     globalContent.forEach(line => {
@@ -31,5 +31,5 @@ function getData() {
 window.addEventListener('DOMContentLoaded', () => {
     getData();
     dataToHTML();
-    parseToDefinitionAndText();
+    parseToDictionary();
 })
