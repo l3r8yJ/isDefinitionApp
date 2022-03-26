@@ -1,11 +1,11 @@
 const {
     app,
     BrowserWindow
-} = require('electron')
+} = require('electron');
 
-const path = require('path')
+const path = require('path');
 
-const editPath = '../../windows/list.html'
+const editPath = '../../windows/list.html';
 
 
 function createWindow() {
@@ -19,28 +19,24 @@ function createWindow() {
             // enablePremoteMode: true,
             enableRemoteModule: true,
         }
-    })
+    });
 
-    win.loadFile('index.html')
-    win.webContents.openDevTools()
+    win.loadFile('index.html');
+    win.webContents.openDevTools();
 }
 
 
 app.whenReady().then(() => {
-    createWindow()
+    createWindow();
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
-            createWindow()
+            createWindow();
         }
     })
 })
 
 
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit()
-    } else {
-        app.quit()
-    }
+    app.quit();
 })
