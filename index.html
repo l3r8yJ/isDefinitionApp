@@ -6,7 +6,7 @@
     <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
     <title>IsDefinition</title>
-    <link rel="stylesheet" href="styles/index.css">
+    <link rel="stylesheet" href="app/styles/index.css">
   </head>
   <body>
     <div class="user-container">
@@ -16,17 +16,11 @@
     </div>
     <br>
     <div class="button-container">
-      <form action="./windows/list.html">
-        <input type="submit" value="Edit" class="btn-new" />
-      </form>
-      <form action="./windows/list.html">
-        <input type="submit" value="Edit" class="btn-new" />
-      </form>
-      <form action="./windows/list.html">
-        <input type="submit" value="Edit" class="btn-new" />
-      </form>
+      <input type="button" class="btn-new" id="btn-help" value="Подсказка"/>
+      <input type="button" class="btn-new" id="btn-answer" value="Ответ"/>
+      <input type="button" class="btn-new" id="btn-edit" value="Edit"/>
     </div>
   
-    <script src="scripts/main/render.js"></script>
+    <script src="app/scripts/main/render.js"></script>
   </body>
 </html>

@@ -2,8 +2,6 @@ const {
     app,
     BrowserWindow
 } = require('electron')
-require('@electron/remote/main').initialize()
-require('@electron/remote/main').enable(BrowserWindow)
 
 const path = require('path')
 

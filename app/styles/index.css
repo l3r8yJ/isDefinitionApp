@@ -37,3 +37,7 @@ h1 {
     right: auto;
     width: 60%;
 }
+
+html {
+    box-sizing: border-box;
+   }
