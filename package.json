@@ -32,8 +32,10 @@
     "better-sqlite3-with-prebuilds": "^7.4.3",
     "electron-builder": "^22.14.13",
     "electron-squirrel-startup": "^1.0.0",
+    "esm": "^3.2.25",
     "express": "^4.17.3",
-    "mysql": "^2.18.1"
+    "mysql": "^2.18.1",
+    "sqlite3": "^5.0.2"
   },
   "config": {
     "forge": {
