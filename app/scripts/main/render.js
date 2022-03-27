@@ -16,7 +16,7 @@ const compare = (userInput) => {
     const listDefs = Object.keys(content);
     const defOnDoc = document.getElementById('isDefinition').innerText;
     const index = listDefs.indexOf(defOnDoc);
-    const currentDefinitionText = Object.values(content)[index];
+    const currentDefinitionText = Object.values(content)[index]
     console.log(listDefs, defOnDoc, index);
 
 
