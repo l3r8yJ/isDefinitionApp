@@ -1,9 +1,11 @@
-/* 
-module Assistent
-@params:
-    content - data from .csv file that contain definitions and represent it to smomething
+const fs = require('fs');
 
-@metods:
+/* 
+* module Assistent
+* @param content
+* *    content - data from .csv file that contain definitions and represent it to smomething
+
+* @metods:
     #contentToHTMLTable(content) - represetns data to table type of:
         <ul>
             <li>...</li>
@@ -11,7 +13,7 @@ module Assistent
             <li>...</li>
         </ul>
 
-    #pareseToDefinitionAndText(content) - creates dictionary with structure like:
+    #pareseToDefinitionAndText(content) - return dictionary with structure like:
         "definition" : "definition's text"
 */
 const assistent = {
@@ -23,8 +25,8 @@ const assistent = {
             data[line[0]] = line[1];
         })
 
-        content = data;
-        console.log(content);
+        //console.log(data);
+        return data;
     },
 
     contentToHTMLTable(content) {
@@ -35,7 +37,24 @@ const assistent = {
         });
 
         document.getElementById('list').innerHTML = html;
-    }
+    },
+
+    pushDefinitionToDocument(content) {
+        const definition = document.getElementById('isDefinition');
+        const definitionText = document.getElementById('isDefinitionText');
+
+        const defs = Object.keys(this.parseToDefinitionAndText(content));
+        const defsText = Object.values(this.parseToDefinitionAndText(content))
+
+        const index = Math.floor(Math.random() * defs.length);
+
+        definition.innerText = defs[index];
+        definitionText.innerText = defsText[index];
+    },
+
+    getData(path) {
+        return fs.readFileSync(path, 'utf8').toString().split('\n');
+    },
 };
 
 module.exports.assistent = assistent;

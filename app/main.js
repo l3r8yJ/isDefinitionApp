@@ -2,11 +2,7 @@ const {
     app,
     BrowserWindow
 } = require('electron');
-
 const path = require('path');
-
-const editPath = '../../windows/list.html';
-
 
 function createWindow() {
     const win = new BrowserWindow({
@@ -15,7 +11,7 @@ function createWindow() {
         webPreferences: {
             preload: path.join(__dirname, './preload.js'),
             nodeIntegration: true,
-            contextIsolation: false,
+            contextIsolation: true,
             // enablePremoteMode: true,
             enableRemoteModule: true,
         }

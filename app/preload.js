@@ -1,15 +1,17 @@
+const {
+    contextBridge,
+    ipcRenderer
+} = require('electron');
+
 const path = require('path');
-const fs = require('fs');
 const assistent = require('./scripts/utils/assistent').assistent;
+const content = assistent.getData(path.join(__dirname, './data/data.csv'));
 
-
-window.addEventListener('DOMContentLoaded', () => {
-
-    assistent.contentToHTMLTable(getData());
-    assistent.parseToDefinitionAndText(getData());
+contextBridge.exposeInMainWorld('electron', {
+    content: assistent.parseToDefinitionAndText(content),
+    resetDefinition: () => assistent.pushDefinitionToDocument(content),
 })
 
-
-function getData() {
-    return fs.readFileSync(path.join(__dirname, '/data/data.csv'), 'utf8').toString().split('\n');
-}
+window.addEventListener('DOMContentLoaded', () => {
+    assistent.pushDefinitionToDocument(content);
+});
