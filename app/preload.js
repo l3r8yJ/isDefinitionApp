@@ -8,7 +8,10 @@ const assistent = require('./scripts/utils/assistent').assistent;
 const content = assistent.getData(path.join(__dirname, './data/data.csv'));
 
 contextBridge.exposeInMainWorld('electron', {
-    content: assistent.parseToDefinitionAndText(content)
+    content: assistent.parseToDefinitionAndText(content),
+    resetDefinition: () => {
+        assistent.pushDefinitionToDocument();
+    }
 })
 
 window.addEventListener('DOMContentLoaded', () => {

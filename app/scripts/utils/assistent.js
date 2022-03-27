@@ -1,11 +1,11 @@
 const fs = require('fs');
 
 /* 
-module Assistent
-@params:
-    content - data from .csv file that contain definitions and represent it to smomething
+* module Assistent
+* @param content
+* *    content - data from .csv file that contain definitions and represent it to smomething
 
-@metods:
+* @metods:
     #contentToHTMLTable(content) - represetns data to table type of:
         <ul>
             <li>...</li>
@@ -41,11 +41,15 @@ const assistent = {
 
     pushDefinitionToDocument(content) {
         const definition = document.getElementById('isDefinition');
-        const definitionText = document.getElementById('definitionText');
-        const defs = this.parseToDefinitionAndText(content);
+        const definitionText = document.getElementById('isDefinitionText');
 
-        definition.innerText = Object.keys(defs)[0];
-        definitionText.innerText = Object.values(defs)[0];
+        const defs = Object.keys(this.parseToDefinitionAndText(content));
+        const defsText = Object.values(this.parseToDefinitionAndText(content))
+
+        const index = Math.floor(Math.random() * defs.length);
+
+        definition.innerText = defs[index];
+        definitionText.innerText = defsText[index];
     },
 
     getData(path) {
