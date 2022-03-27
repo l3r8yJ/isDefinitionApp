@@ -1,3 +1,5 @@
+const fs = require('fs');
+
 /* 
 module Assistent
 @params:
@@ -11,7 +13,7 @@ module Assistent
             <li>...</li>
         </ul>
 
-    #pareseToDefinitionAndText(content) - creates dictionary with structure like:
+    #pareseToDefinitionAndText(content) - return dictionary with structure like:
         "definition" : "definition's text"
 */
 const assistent = {
@@ -23,8 +25,8 @@ const assistent = {
             data[line[0]] = line[1];
         })
 
-        content = data;
-        console.log(content);
+        //console.log(data);
+        return data;
     },
 
     contentToHTMLTable(content) {
@@ -35,7 +37,20 @@ const assistent = {
         });
 
         document.getElementById('list').innerHTML = html;
-    }
+    },
+
+    pushDefinitionToDocument(content) {
+        const definition = document.getElementById('isDefinition');
+        const definitionText = document.getElementById('definitionText');
+        const defs = this.parseToDefinitionAndText(content);
+
+        definition.innerText = Object.keys(defs)[0];
+        definitionText.innerText = Object.values(defs)[0];
+    },
+
+    getData(path) {
+        return fs.readFileSync(path, 'utf8').toString().split('\n');
+    },
 };
 
 module.exports.assistent = assistent;
