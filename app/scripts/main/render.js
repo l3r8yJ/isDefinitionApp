@@ -1,9 +1,11 @@
 //const path = require('path');
 //const assistent = require('../utils/assistent').assistent;
 //const content = assistent.getData(path.join(__dirname, '../../data/data.csv'));
-const button = document.getElementById('btn-answer');
+const buttonAnswer = document.getElementById('btn-answer');
+const buttonReset = document.getElementById('btn-reset');
 
-content = window.electron.content;
+const content = window.electron.content;
+const resetDefinition = window.electron.resetDefinition;
 
 const compare = (userInput, currentDefinitionText) => {
 
@@ -34,7 +36,7 @@ const compare = (userInput, currentDefinitionText) => {
     return result;
 };
 
-button.addEventListener('click', () => {
+buttonAnswer.addEventListener('click', () => {
     const userInput = document.getElementById('user-input').value;
     const currentDefinitionText = document.getElementById('isDefinitionText').innerText
 
@@ -44,3 +46,7 @@ button.addEventListener('click', () => {
         throw new Error('Empty data.')
     }
 });
+
+buttonReset.addEventListener('click', () => {
+    resetDefinition();
+})
