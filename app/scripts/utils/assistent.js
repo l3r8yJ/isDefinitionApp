@@ -2,18 +2,18 @@ const fs = require('fs');
 
 /* 
 * module Assistent
-* @param content
-* *    content - data from .csv file that contain definitions and represent it to smomething
+* @params:
+    content - data from .csv file that contain definitions and represent it to smomething
 
 * @metods:
-    #contentToHTMLTable(content) - represetns data to table type of:
+* *    #contentToHTMLTable(content) - represetns data to table type of:
         <ul>
             <li>...</li>
             <li>...</li>
             <li>...</li>
         </ul>
 
-    #pareseToDefinitionAndText(content) - return dictionary with structure like:
+* *   #pareseToDefinitionAndText(content) - return dictionary with structure like:
         "definition" : "definition's text"
 */
 const assistent = {

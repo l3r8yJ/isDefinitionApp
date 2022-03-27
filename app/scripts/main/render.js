@@ -1,12 +1,14 @@
-//const path = require('path');
-//const assistent = require('../utils/assistent').assistent;
-//const content = assistent.getData(path.join(__dirname, '../../data/data.csv'));
 const buttonAnswer = document.getElementById('btn-answer');
 const buttonReset = document.getElementById('btn-reset');
 
+// content is a data from data.csv in Object format
 const content = window.electron.content;
+
+// resetDefinition is a function of assistent = pushDefinitionToDocument
 const resetDefinition = window.electron.resetDefinition;
 
+// here we compare string in id="user-input" with original
+// text in id="isDefinitionText" 
 const compare = (userInput, currentDefinitionText) => {
 
     const percentPerSymbol = 100 / currentDefinitionText.length;
@@ -21,9 +23,7 @@ const compare = (userInput, currentDefinitionText) => {
         }
     }
 
-    if (accuracy > 80) {
-        isCorrect = true;
-    }
+    isCorrect = accuracy >= 80;
 
     accuracy = Math.round(accuracy);
 
@@ -31,11 +31,10 @@ const compare = (userInput, currentDefinitionText) => {
         "accuracy": accuracy,
         "isCorrect": isCorrect,
     }
-
-    console.log(accuracy);
     return result;
 };
 
+// comparing
 buttonAnswer.addEventListener('click', () => {
     const userInput = document.getElementById('user-input').value;
     const currentDefinitionText = document.getElementById('isDefinitionText').innerText
@@ -46,6 +45,7 @@ buttonAnswer.addEventListener('click', () => {
         throw new Error('Empty data.')
     }
 });
+
 
 buttonReset.addEventListener('click', () => {
     resetDefinition();
