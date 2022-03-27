@@ -4,6 +4,8 @@
 
 #### Installation guide *(npm required!)*
 
+#### Doesn't run in current version. 
+
 >Clone git repository:
 >
 >- `git clone https://github.com/l3r8yJ/isDefinitionApp.git`
@@ -20,4 +22,5 @@
 >
 >- `cd out/yourfolder/`
 >
-> There will be an executable file in this folder 
+> There will be an executable file in your os folder
+

@@ -1,11 +1,11 @@
 const {
     app,
     BrowserWindow
-} = require('electron')
+} = require('electron');
 
-const path = require('path')
+const path = require('path');
 
-const editPath = '../../windows/list.html'
+const editPath = '../../windows/list.html';
 
 
 function createWindow() {
@@ -13,34 +13,30 @@ function createWindow() {
         width: 800,
         height: 600,
         webPreferences: {
-            preload: path.join(__dirname, './scripts/main/preload.js'),
+            preload: path.join(__dirname, './preload.js'),
             nodeIntegration: true,
             contextIsolation: false,
             // enablePremoteMode: true,
             enableRemoteModule: true,
         }
-    })
+    });
 
-    win.loadFile('index.html')
-    win.webContents.openDevTools()
+    win.loadFile('index.html');
+    win.webContents.openDevTools();
 }
 
 
 app.whenReady().then(() => {
-    createWindow()
+    createWindow();
 
     app.on('activate', () => {
         if (BrowserWindow.getAllWindows().length === 0) {
-            createWindow()
+            createWindow();
         }
     })
 })
 
 
 app.on('window-all-closed', () => {
-    if (process.platform !== 'darwin') {
-        app.quit()
-    } else {
-        app.quit()
-    }
+    app.quit();
 })
