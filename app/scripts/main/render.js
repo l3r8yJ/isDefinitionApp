@@ -53,13 +53,22 @@ buttonAnswer.addEventListener('click', () => {
 // takes string from isDefinitionText and replae one underscored word to normal
 function showWord() {
     const currentDefinitionText = getCurrentDefinitionText().split(' ');
-    let underscoredText = document.getElementById('isDefinitionText').innerText
+    let underscoredText = document.getElementById('isDefinitionText').innerText.split(' ')
+    let underscoredTextWithWord = '';
     const newWordIndex = Math.floor(Math.random() * currentDefinitionText.length);
 
     underscoredText[newWordIndex] = currentDefinitionText[newWordIndex];
-    console.log(underscoredText, currentDefinitionText);
-    document.getElementById('isDefinitionText').innerText = underscoredText;
-    //document.getElementById('isDefinitionText').innerText = currentDefinitionText[Math.floor(Math.random() * currentDefinitionText.length)];
+
+    underscoredText.forEach(element => {
+        if (element !== underscoredText[-1]) {
+            underscoredTextWithWord += element + ' ';
+        } else {
+            underscoredTextWithWord += element;
+        }
+    });
+
+    console.log(underscoredTextWithWord, currentDefinitionText);
+    document.getElementById('isDefinitionText').innerText = underscoredTextWithWord;
 }
 
 

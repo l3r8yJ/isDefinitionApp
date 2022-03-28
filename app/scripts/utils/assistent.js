@@ -73,9 +73,7 @@ const assistent = {
                 underscoredText += '_'.repeat(element.length);
             }
         });
-
-        console.log(underscoredText);
-
+        // string type of ___ ____ ___
         docText.innerText = underscoredText;
     }
 };
