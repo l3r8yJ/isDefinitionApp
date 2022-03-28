@@ -14,6 +14,7 @@ contextBridge.exposeInMainWorld('electron', {
     content: assistent.parseToDefinitionAndText(content),
     resetDefinition: () => assistent.pushDefinitionToDocument(content),
     resetDefinitionText: () => assistent.replaceDefinitionText(),
+    createHTMLTable: () => assistent.contentToHTMLTable(content),
 });
 
 // preset first definition to document

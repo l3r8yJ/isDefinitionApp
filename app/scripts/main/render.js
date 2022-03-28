@@ -1,6 +1,7 @@
 const buttonAnswer = document.getElementById('btn-answer');
 const buttonReset = document.getElementById('btn-reset');
 const buttonHelp = document.getElementById('btn-help');
+const buttonEdit = document.getElementById('btn-edit');
 
 // content is a data from data.csv in Object format
 const content = window.electron.content;
@@ -8,6 +9,7 @@ const content = window.electron.content;
 // resetDefinition is a function of assistent = pushDefinitionToDocument
 const resetDefinition = window.electron.resetDefinition;
 const resetDefinitionText = window.electron.resetDefinitionText;
+const createHTMLTable = window.electron.createHTMLTable;
 
 
 // here we compare string in id="user-input" with original
@@ -18,6 +20,11 @@ const compareUserAndDefinition = (userInput) => {
 
     const percentPerSymbol = 100 / currentDefinitionText.length;
     let accuracy = 0.0;
+
+    if (userInput.length > currentDefinitionText.length) {
+        alert('Слишком большой объем');
+        return;
+    }
 
     if (userInput.length <= currentDefinitionText.length) {
         for (let i = 0; i < currentDefinitionText.length; i++) {
@@ -43,7 +50,18 @@ buttonAnswer.addEventListener('click', () => {
     const currentDefinitionText = document.getElementById('isDefinitionText').innerText;
 
     if (currentDefinitionText.length !== 0) {
-        compareUserAndDefinition(userInput, currentDefinitionText);
+        const res = compareUserAndDefinition(userInput, currentDefinitionText);
+
+        const answer = document.getElementById('answer');
+
+        if (res.isCorrect) {
+            answer.innerText = 'Ответ верный, точность определения составляет ' + res.accuracy.toString() + '%.';
+            answer.style.cssText = 'color: green';
+        } else {
+            answer.innerText = 'Ответ неверный, точность определения составляет ' + res.accuracy.toString() + '%.';
+            answer.style.cssText = 'color: red';
+        }
+
     } else {
         throw new Error('Empty data.');
     }
@@ -130,3 +148,8 @@ buttonReset.addEventListener('click', () => {
 buttonHelp.addEventListener('click', () => {
     showWord();
 });
+
+
+buttonEdit.addEventListener('click', () => {
+    createHTMLTable(content);
+})
