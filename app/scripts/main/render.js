@@ -55,9 +55,20 @@ function showWord() {
     const currentDefinitionText = getCurrentDefinitionText().split(' ');
     let underscoredText = document.getElementById('isDefinitionText').innerText.split(' ')
     let underscoredTextWithWord = '';
-    const newWordIndex = Math.floor(Math.random() * currentDefinitionText.length);
+    let newWordIndex = Math.floor(Math.random() * currentDefinitionText.length);
+    isChanged = false;
 
-    underscoredText[newWordIndex] = currentDefinitionText[newWordIndex];
+    while (!isChanged) {
+        if (underscoredText[newWordIndex].search('_') !== -1) {
+            underscoredText[newWordIndex] = currentDefinitionText[newWordIndex];
+            isChanged = true;
+        } else {
+            newWordIndex = Math.floor(Math.random() * currentDefinitionText.length);
+        }
+    }
+
+
+    console.log(underscoredText);
 
     underscoredText.forEach(element => {
         if (element !== underscoredText[-1]) {
