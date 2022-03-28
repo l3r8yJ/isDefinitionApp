@@ -1,3 +1,8 @@
 body, input {
     font: menu;
   }
+
+body {
+  background: url(../images/imgonline-com-ua-Black-White-6CeR4Cn5f8bfCw0.png);
+  background-size: 110%;
+}
