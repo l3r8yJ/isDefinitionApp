@@ -56,9 +56,27 @@ const assistent = {
         return fs.readFileSync(path, 'utf8').toString().split('\n');
     },
 
+
+    // correctly underscores the isDefinitionText 
     replaceDefinitionText() {
-        const current = document.getElementById('isDefinitionText');
-        current.innerText = '_'.repeat(current.innerText.length);
+        const docText = document.getElementById('isDefinitionText');
+        let current = document.getElementById('isDefinitionText').innerText;
+        let underscoredText = '';
+
+        current = current.split(' ');
+
+        current.forEach(element => {
+            if (element !== current[-1]) {
+                underscoredText += '_'.repeat(element.length);
+                underscoredText += ' ';
+            } else {
+                underscoredText += '_'.repeat(element.length);
+            }
+        });
+
+        console.log(underscoredText);
+
+        docText.innerText = underscoredText;
     }
 };
 

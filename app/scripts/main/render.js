@@ -1,5 +1,6 @@
 const buttonAnswer = document.getElementById('btn-answer');
 const buttonReset = document.getElementById('btn-reset');
+const buttonHelp = document.getElementById('btn-help');
 
 // content is a data from data.csv in Object format
 const content = window.electron.content;
@@ -11,14 +12,9 @@ const resetDefinitionText = window.electron.resetDefinitionText;
 
 // here we compare string in id="user-input" with original
 // text in id="isDefinitionText" 
-const compare = (userInput) => {
+const compareUserAndDefinition = (userInput) => {
 
-    const listDefs = Object.keys(content);
-    const defOnDoc = document.getElementById('isDefinition').innerText;
-    const index = listDefs.indexOf(defOnDoc);
-    const currentDefinitionText = Object.values(content)[index]
-    console.log(listDefs, defOnDoc, index);
-
+    const currentDefinitionText = getCurrentDefinitionText();
 
     const percentPerSymbol = 100 / currentDefinitionText.length;
     let accuracy = 0.0;
@@ -47,14 +43,37 @@ buttonAnswer.addEventListener('click', () => {
     const currentDefinitionText = document.getElementById('isDefinitionText').innerText;
 
     if (currentDefinitionText.length !== 0) {
-        compare(userInput, currentDefinitionText);
+        compareUserAndDefinition(userInput, currentDefinitionText);
     } else {
         throw new Error('Empty data.');
     }
 });
 
 
+// takes string from isDefinitionText and replae one underscored word to normal
+function showWord() {
+    const currentDefinitionText = getCurrentDefinitionText().split(' ');
+    let underscoredText = document.getElementById('isDefinitionText').innerText
+    const newWordIndex = Math.floor(Math.random() * currentDefinitionText.length);
+
+    underscoredText[newWordIndex] = currentDefinitionText[newWordIndex];
+    console.log(underscoredText, currentDefinitionText);
+    document.getElementById('isDefinitionText').innerText = underscoredText;
+    //document.getElementById('isDefinitionText').innerText = currentDefinitionText[Math.floor(Math.random() * currentDefinitionText.length)];
+}
+
+
+function getCurrentDefinitionText() {
+    return Object.values(content)[Object.keys(content).indexOf(document.getElementById('isDefinition').innerText)];
+};
+
+
 buttonReset.addEventListener('click', () => {
     resetDefinition();
     resetDefinitionText();
+});
+
+
+buttonHelp.addEventListener('click', () => {
+    showWord();
 });
