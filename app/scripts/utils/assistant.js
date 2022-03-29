@@ -1,7 +1,7 @@
 const fs = require("fs");
 
 /* 
-* module Assistent
+* module Assistant
 * @params:
     content - data from .csv file that contain definitions and represent it to something
 
@@ -16,7 +16,7 @@ const fs = require("fs");
 * *   #parseToDefinitionAndText(content) - return dictionary with structure like:
         "definition" : "definition's text"
 */
-const assistent = {
+const assistant = {
   parseToDefinitionAndText(content) {
     let data = {};
 
@@ -51,7 +51,11 @@ const assistent = {
   },
 
   getData(path) {
-    return fs.readFileSync(path, "utf8").toString().split("\n");
+    try {
+      return fs.readFileSync(path, "utf8").toString().split("\n");
+    } catch (error) {
+      if (error.code === "ENOENT") console.log("File not found!");
+    }
   },
 
   // correctly underscores the isDefinitionText
@@ -75,4 +79,4 @@ const assistent = {
   },
 };
 
-module.exports.assistent = assistent;
+module.exports.assistant = assistant;

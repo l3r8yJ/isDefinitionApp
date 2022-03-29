@@ -44,7 +44,7 @@ buttonAnswer.addEventListener("click", () => {
   const currentDefinitionText =
     document.getElementById("isDefinitionText").innerText;
 
-  if (current.definitionText.length === 0) throw new Error("Empty definition.");
+  if (currentDefinitionText.length === 0) throw new Error("Empty definition.");
 
   const res = compareUserAndDefinition(userInput, currentDefinitionText);
   correctCheck(res);
@@ -136,6 +136,9 @@ function getCurrentDefinitionText() {
 }
 
 buttonReset.addEventListener("click", () => {
+  const input = document.getElementById("user-input");
+  input.value = "";
+
   resetDefinition();
   resetDefinitionText();
 });

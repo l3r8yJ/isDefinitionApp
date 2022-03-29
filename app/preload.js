@@ -1,24 +1,24 @@
 const { contextBridge, ipcRenderer } = require("electron");
 
 const path = require("path");
-const assistent = require("./scripts/utils/assistent").assistent;
-const content = assistent.getData(path.join(__dirname, "./data/data.csv"));
+const assistant = require("./scripts/utils/assistant").assistant;
+const content = assistant.getData(path.join(__dirname, "./data/data.csv"));
 
 // sending to render process
 // @content
 // @resetDefinition func
 contextBridge.exposeInMainWorld("electron", {
-  content: assistent.parseToDefinitionAndText(content),
-  resetDefinition: () => assistent.pushDefinitionToDocument(content),
-  resetDefinitionText: () => assistent.replaceDefinitionText(),
-  createHTMLTable: () => assistent.contentToHTMLTable(content),
+  content: assistant.parseToDefinitionAndText(content),
+  resetDefinition: () => assistant.pushDefinitionToDocument(content),
+  resetDefinitionText: () => assistant.replaceDefinitionText(),
+  createHTMLTable: () => assistant.contentToHTMLTable(content),
   openList: () => openList(),
 });
 
 // preset first definition to document
 window.addEventListener("DOMContentLoaded", () => {
-  assistent.pushDefinitionToDocument(content);
-  assistent.replaceDefinitionText();
+  assistant.pushDefinitionToDocument(content);
+  assistant.replaceDefinitionText();
 });
 
 function openList() {

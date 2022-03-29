@@ -16,7 +16,7 @@ function createWindow() {
   });
 
   mainWindow.loadFile("index.html");
-  mainWindow.webContents.openDevTools();
+  //mainWindow.webContents.openDevTools();
 }
 
 function createListWindow() {
@@ -24,8 +24,10 @@ function createListWindow() {
     height: 600,
     width: 800,
     webPreferences: {
+      preload: path.join(__dirname, "./scripts/list/preload.js"),
       nodeIntegration: true,
       enableRemoteModule: true,
+      contextIsolation: true,
       modal: true,
       show: false,
     },
@@ -33,6 +35,7 @@ function createListWindow() {
   });
   listWindow.setTitle("Edit");
   listWindow.loadFile(path.join(__dirname, "./windows/list.html"));
+  listWindow.webContents.openDevTools();
 }
 
 ipcMain.on("open-list", () => {
