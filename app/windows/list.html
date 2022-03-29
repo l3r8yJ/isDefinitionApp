@@ -1,21 +1,31 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <title>List of defenitions</title>
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <title>List of definitions</title>
+    <link rel="stylesheet" href="../styles/index.css" />
   </head>
   <body>
-    <div id="definitions">
-        <ul id="list">
-            <li>test list 1 - some text 1 </li>
-            <li>test list 2 - some text 2 </li>
-            <li>test list 3 - some text 3 </li>
-        </ul>
+    <div class="header" id="header">
+      <h2>Edit</h2>
     </div>
-  
+    <div class="textContainer" id="text-container">
+      <!--ul id="table"></ul-->
+      <textarea id="text-area" cols="30" rows="10"></textarea>
+    </div>
+    <div class="footer" id="footer">
+      <input type="submit" value="Сохранить" id="btn-save" />
+    </div>
+
     <script src="../scripts/list/render.js"></script>
   </body>
 </html>

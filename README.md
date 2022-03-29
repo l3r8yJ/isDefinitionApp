@@ -2,25 +2,24 @@
 
 ## **IsDefinition** - is a simple app that makes it easy to memorize your definitions.
 
-#### Installation guide *(npm required!)*
+#### Installation guide _(npm required!)_
 
-#### Doesn't run in current version. 
+#### Doesn't run in current version.
 
->Clone git repository:
+> Clone git repository:
 >
->- `git clone https://github.com/l3r8yJ/isDefinitionApp.git`
+> - `git clone https://github.com/l3r8yJ/isDefinitionApp.git`
 >
->Chage directory:
+> Change directory:
 >
->- `cd isDefinitionApp`
+> - `cd isDefinitionApp`
 >
->Run make: 
+> Run make:
 >
->- `npm run make`
+> - `npm run make`
 >
->Change directory to *out/your OS folder/*
+> Change directory to _out/your OS folder/_
 >
->- `cd out/yourfolder/`
+> - `cd out/yourFolder/`
 >
 > There will be an executable file in your os folder
-
