@@ -3,6 +3,6 @@ const saveButton = document.getElementById("btn-save");
 const saveContent = window.electron.saveContent;
 
 saveButton.addEventListener("click", () => {
-  const content = document.getElementById("text-area").value;
-  saveContent(content.toString());
+  const content = document.getElementById("text-area").innerText;
+  saveContent(content);
 });
