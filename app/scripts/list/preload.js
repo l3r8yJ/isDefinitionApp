@@ -6,12 +6,16 @@ const assistant = require("../utils/assistant").assistant;
 const content = assistant.getData(path.join(__dirname, "../../data/data.csv"));
 
 contextBridge.exposeInMainWorld("electron", {
-  saveContent: () => saveContent(content),
+  saveContent: () => saveContent(),
 });
 
 function saveContent(content) {
   try {
-    fs.writeFileSync("../../data/data.csv", content, "utf-8");
+    fs.writeFileSync(
+      path.join(__dirname, "../../data/data.csv"),
+      content,
+      "utf8"
+    );
     alert("Данные успешно сохранены!");
   } catch (error) {
     if (error.code === "ENOENT") {
