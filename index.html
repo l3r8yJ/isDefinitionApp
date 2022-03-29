@@ -1,39 +1,50 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'">
-    <meta http-equiv="X-Content-Security-Policy" content="default-src 'self'; script-src 'self'">
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
+    <meta
+      http-equiv="X-Content-Security-Policy"
+      content="default-src 'self'; script-src 'self'"
+    />
     <title>IsDefinition</title>
-    <link rel="stylesheet" href="app/styles/index.css">
+    <link rel="stylesheet" href="app/styles/index.css" />
   </head>
   <body>
     <div class="user-container">
       <h1 class="page-header" id="isDefinition">IsDefinition</h1>
-      <br>
-      <h3 id="isDefinitionText"></h3> 
-      <br> 
-      <h3 id="answer"></h3>  
+      <br />
+      <h3 id="isDefinitionText"></h3>
+      <br />
+      <h3 id="answer"></h3>
     </div>
-    <br>
+    <br />
     <div class="button-container">
-      <input type="button" class="btn-new" id="btn-help" value="Подсказка"/>
-      <input type="button" class="btn-new" id="btn-answer" value="Ответ"/>
-      <input type="button" class="btn-new" id="btn-reset" value="Reset"/>
+      <input type="button" class="btn-new" id="btn-help" value="Подсказка" />
+      <input type="button" class="btn-new" id="btn-answer" value="Ответ" />
+      <input type="button" class="btn-new" id="btn-reset" value="Reset" />
     </div>
-    <br>
+    <br />
     <div class="user-text-container">
-      <input class="text-input" type="text" id="user-input" value="Введите определение"/>
-      <br>
-      <input type="button" class="btn-new" id="btn-edit" value="Edit"/>
+      <input
+        class="text-input"
+        type="text"
+        id="user-input"
+        value="Введите определение"
+      />
+      <br />
+      <input type="button" class="btn-new" id="btn-edit" value="Edit" />
+      <br />
     </div>
 
     <div id="definitions">
-      <ul id="list">
-      </ul>
-  </div>
-  
+      <ul id="list"></ul>
+    </div>
+
     <script src="app/scripts/main/render.js"></script>
   </body>
 </html>

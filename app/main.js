@@ -1,38 +1,54 @@
-const {
-    app,
-    BrowserWindow
-} = require('electron');
-const path = require('path');
+const { app, BrowserWindow, ipcMain } = require("electron");
+const path = require("path");
 
 function createWindow() {
-    const win = new BrowserWindow({
-        width: 800,
-        height: 600,
-        webPreferences: {
-            preload: path.join(__dirname, './preload.js'),
-            nodeIntegration: true,
-            contextIsolation: true,
-            // enablePremoteMode: true,
-            enableRemoteModule: true,
-        }
-    });
+  const mainWindow = new BrowserWindow({
+    width: 800,
+    height: 600,
+    webPreferences: {
+      preload: path.join(__dirname, "./preload.js"),
+      nodeIntegration: true,
+      contextIsolation: true,
+      // enablePremoteMode: true,
+      enableRemoteModule: true,
+      nativeWindowOpen: false,
+    },
+  });
 
-    win.loadFile('index.html');
-    //win.webContents.openDevTools();
+  mainWindow.loadFile("index.html");
+  mainWindow.webContents.openDevTools();
 }
 
+function createListWindow() {
+  const listWindow = new BrowserWindow({
+    height: 600,
+    width: 800,
+    webPreferences: {
+      nodeIntegration: true,
+      enableRemoteModule: true,
+      modal: true,
+      show: false,
+    },
+    title: "Edit",
+  });
+  listWindow.setTitle("Edit");
+  listWindow.loadFile(path.join(__dirname, "./windows/list.html"));
+}
+
+ipcMain.on("open-list", () => {
+  createListWindow();
+});
 
 app.whenReady().then(() => {
-    createWindow();
+  createWindow();
 
-    app.on('activate', () => {
-        if (BrowserWindow.getAllWindows().length === 0) {
-            createWindow();
-        }
-    })
-})
+  app.on("activate", () => {
+    if (BrowserWindow.getAllWindows().length === 0) {
+      createWindow();
+    }
+  });
+});
 
-
-app.on('window-all-closed', () => {
-    app.quit();
-})
+app.on("window-all-closed", () => {
+  app.quit();
+});

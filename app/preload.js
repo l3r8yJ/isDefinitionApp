@@ -1,24 +1,26 @@
-const {
-    contextBridge,
-    ipcRenderer
-} = require('electron');
+const { contextBridge, ipcRenderer } = require("electron");
 
-const path = require('path');
-const assistent = require('./scripts/utils/assistent').assistent;
-const content = assistent.getData(path.join(__dirname, './data/data.csv'));
+const path = require("path");
+const assistent = require("./scripts/utils/assistent").assistent;
+const content = assistent.getData(path.join(__dirname, "./data/data.csv"));
 
-// sending to render process 
+// sending to render process
 // @content
 // @resetDefinition func
-contextBridge.exposeInMainWorld('electron', {
-    content: assistent.parseToDefinitionAndText(content),
-    resetDefinition: () => assistent.pushDefinitionToDocument(content),
-    resetDefinitionText: () => assistent.replaceDefinitionText(),
-    createHTMLTable: () => assistent.contentToHTMLTable(content),
+contextBridge.exposeInMainWorld("electron", {
+  content: assistent.parseToDefinitionAndText(content),
+  resetDefinition: () => assistent.pushDefinitionToDocument(content),
+  resetDefinitionText: () => assistent.replaceDefinitionText(),
+  createHTMLTable: () => assistent.contentToHTMLTable(content),
+  openList: () => openList(),
 });
 
 // preset first definition to document
-window.addEventListener('DOMContentLoaded', () => {
-    assistent.pushDefinitionToDocument(content);
-    assistent.replaceDefinitionText();
+window.addEventListener("DOMContentLoaded", () => {
+  assistent.pushDefinitionToDocument(content);
+  assistent.replaceDefinitionText();
 });
+
+function openList() {
+  ipcRenderer.send("open-list");
+}
