@@ -4,8 +4,6 @@
 
 #### Installation guide _(npm required!)_
 
-#### Doesn't run in current version.
-
 > Clone git repository:
 >
 > - `git clone https://github.com/l3r8yJ/isDefinitionApp.git`
