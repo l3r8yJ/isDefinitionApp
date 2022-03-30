@@ -9,7 +9,9 @@ contextBridge.exposeInMainWorld("electron", {
   saveContent: () => saveContent(),
 });
 
-function saveContent(content) {
+function saveContent() {
+  const content = document.getElementById("text-area").value;
+
   try {
     fs.writeFileSync(
       path.join(__dirname, "../../data/data.csv"),
