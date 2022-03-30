@@ -35,7 +35,7 @@ function createListWindow() {
   });
   listWindow.setTitle("Edit");
   listWindow.loadFile(path.join(__dirname, "./windows/list.html"));
-  listWindow.webContents.openDevTools();
+  //listWindow.webContents.openDevTools();
 }
 
 ipcMain.on("open-list", () => {

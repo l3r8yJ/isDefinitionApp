@@ -1,6 +1,5 @@
 const fs = require("fs");
 const { contextBridge, ipcRenderer } = require("electron");
-
 const path = require("path");
 const assistant = require("../utils/assistant").assistant;
 const content = assistant.getData(path.join(__dirname, "../../data/data.csv"));
@@ -11,6 +10,7 @@ contextBridge.exposeInMainWorld("electron", {
 
 function saveContent() {
   const content = document.getElementById("text-area").value;
+  let message = "";
 
   try {
     fs.writeFileSync(
@@ -18,17 +18,20 @@ function saveContent() {
       content,
       "utf8"
     );
-    alert("Данные успешно сохранены!");
+    message = "Данные успешно сохранены!";
   } catch (error) {
-    if (error.code === "ENOENT") {
-      console.log("File not found!");
-    } else {
-      console.log(error);
-    }
+    message = error.message;
   }
+
+  alert(message);
 }
 
 function presetDocument(content) {
+  if (!content) {
+    alert("Data are empty");
+    return;
+  }
+
   const tArea = document.getElementById("text-area");
   let text = "";
 

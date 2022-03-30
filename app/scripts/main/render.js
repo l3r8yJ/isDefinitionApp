@@ -15,8 +15,14 @@ const openList = window.electron.openList;
 // here we compare string in id="user-input" with original
 // text in id="isDefinitionText"
 const compareUserAndDefinition = (userInput) => {
+  if (userInput === undefined || userInput.length === 0) {
+    alert("Please enter definition text.");
+    return;
+  }
+
   const currentDefinitionText = getCurrentDefinitionText();
-  const percentPerSymbol = 100 / currentDefinitionText.length;
+  const PERCENTS = 100;
+  const PERCENT_PER_SYMBOL = PERCENTS / currentDefinitionText.length;
   let accuracy = 0.0;
 
   if (userInput.length > currentDefinitionText.length) {
@@ -25,7 +31,8 @@ const compareUserAndDefinition = (userInput) => {
   }
 
   for (let i = 0; i < currentDefinitionText.length; i++) {
-    if (currentDefinitionText[i] === userInput[i]) accuracy += percentPerSymbol;
+    if (currentDefinitionText[i] === userInput[i])
+      accuracy += PERCENT_PER_SYMBOL;
   }
 
   accuracy = Math.round(accuracy);
@@ -51,17 +58,28 @@ buttonAnswer.addEventListener("click", () => {
 });
 
 function correctCheck(res) {
-  const end = res.accuracy.toString() + "%.";
   const docAnswer = document.getElementById("answer");
+  const result = {
+    total: "",
+    end: "",
+    cssText: "",
+  };
+
+  result.end = res.accuracy.toString() + "%.";
 
   if (res.isCorrect) {
-    answer.innerText = "Ответ верный, точность определения составляет " + end;
-    answer.style.cssText = "color: green";
+    result.total =
+      "Ответ верный, точность определения составляет " + result.end;
+    result.cssText = "color: green";
   }
   if (!res.isCorrect) {
-    answer.innerText = "Ответ неверный, точность определения составляет " + end;
-    answer.style.cssText = "color: red";
+    result.total =
+      "Ответ неверный, точность определения составляет " + result.end;
+    result.cssText = "color: red";
   }
+
+  docAnswer.innerText = result.total;
+  docAnswer.style.cssText = result.cssText;
 }
 
 // takes string from isDefinitionText and replace one underscored word to normal
