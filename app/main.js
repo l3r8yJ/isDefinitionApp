@@ -40,22 +40,24 @@ function createListWindow() {
   return listWindow;
 }
 
-ipcMain.on("open-list", () => {
-  const listWindow = createListWindow();
-});
-
 app.whenReady().then(() => {
   const mainWindow = createWindow();
+  let listWindow;
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
-      createWindow();
+      mainWindow.show();
     }
   });
 
   ipcMain.on("data-update", (event, arg) => {
     event.sender.send("reply-on-update", { not_right: false });
     mainWindow.webContents.send("data-updated", arg);
+    mainWindow.webContents.reload();
+  });
+
+  ipcMain.on("open-list", () => {
+    listWindow = createListWindow();
   });
 });
 

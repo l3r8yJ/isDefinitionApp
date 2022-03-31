@@ -3,7 +3,6 @@ const { contextBridge, ipcRenderer } = require("electron");
 const path = require("path");
 const assistant = require("./scripts/utils/assistant").assistant;
 let content = assistant.getData(path.join(__dirname, "./data/data.csv"));
-let container = "";
 
 // sending to render process
 contextBridge.exposeInMainWorld("electron", {
@@ -24,11 +23,3 @@ window.addEventListener("DOMContentLoaded", () => {
 function openList() {
   ipcRenderer.send("open-list");
 }
-
-ipcRenderer.on("data-updated", async (event, arg) => {
-  console.log({ type: typeof arg, data: arg });
-  container = await assistant.parseToDefinitionAndText(arg);
-  contextBridge.exposeInMainWorld("electron", {
-    refreshedContent: container,
-  });
-});

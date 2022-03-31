@@ -10,7 +10,7 @@ let content = window.electron.content;
 const resetDefinition = window.electron.resetDefinition;
 const resetDefinitionText = window.electron.resetDefinitionText;
 const createHTMLTable = window.electron.createHTMLTable;
-const openList = window.electron.openList;
+const sendMessageToOpenList = window.electron.openList;
 
 // here we compare string in id="user-input"
 // with original text
@@ -176,12 +176,5 @@ buttonHelp.addEventListener("click", () => {
 
 buttonEdit.addEventListener("click", async (e) => {
   e.preventDefault();
-  openList();
-  async () => {
-    try {
-      content = window.electron.refreshContent;
-    } catch (error) {
-      console.log(error);
-    }
-  };
+  sendMessageToOpenList();
 });
