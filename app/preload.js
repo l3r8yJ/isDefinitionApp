@@ -25,9 +25,9 @@ function openList() {
   ipcRenderer.send("open-list");
 }
 
-ipcRenderer.on("data-updated", (event, arg) => {
+ipcRenderer.on("data-updated", async (event, arg) => {
   console.log({ type: typeof arg, data: arg });
-  container = assistant.parseToDefinitionAndText(arg);
+  container = await assistant.parseToDefinitionAndText(arg);
   contextBridge.exposeInMainWorld("electron", {
     refreshedContent: container,
   });
