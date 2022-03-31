@@ -153,6 +153,14 @@ function getCurrentDefinitionText() {
   ];
 }
 
+async function refreshContent(content) {
+  try {
+    content = window.electron.updatedContent;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 buttonReset.addEventListener("click", () => {
   const input = document.getElementById("user-input");
   input.value = "";
@@ -165,7 +173,8 @@ buttonHelp.addEventListener("click", () => {
   showWord();
 });
 
-buttonEdit.addEventListener("click", (e) => {
+buttonEdit.addEventListener("click", async (e) => {
   e.preventDefault();
   openList();
+  await refreshContent(content);
 });

@@ -14,6 +14,7 @@ contextBridge.exposeInMainWorld("electron", {
   createHTMLTable: () => assistant.contentToHTMLTable(content),
   openList: () => openList(),
   updateContent: () => updateContent(),
+  onDataUpdate: () => onDataUpdate(),
 });
 
 // preset first definition to document
@@ -26,6 +27,9 @@ function openList() {
   ipcRenderer.send("open-list");
 }
 
-function updateContent(content) {
-  content = assistant.getData(path.join(__dirname, "./data/data.csv"));
-}
+ipcRenderer.on("data-updated", (event, arg) => {
+  console.log(arg);
+  contextBridge.exposeInMainWorld("electron", {
+    updatedContent: arg,
+  });
+});
