@@ -43,7 +43,6 @@ function createListWindow() {
 app.whenReady().then(() => {
   const mainWindow = createWindow();
   let listWindow;
-
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       mainWindow.show();

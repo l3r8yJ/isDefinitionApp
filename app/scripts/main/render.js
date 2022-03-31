@@ -59,27 +59,19 @@ buttonAnswer.addEventListener("click", () => {
 
 function correctCheck(res) {
   const docAnswer = document.getElementById("answer");
-  const result = {
-    total: "",
-    end: "",
-    cssText: "",
-  };
-
-  result.end = res.accuracy.toString() + "%.";
+  let insert, color;
 
   if (res.isCorrect) {
-    result.total =
-      "Ответ верный, точность определения составляет " + result.end;
-    result.cssText = "color: green";
+    insert = "верный";
+    color = "green";
   }
   if (!res.isCorrect) {
-    result.total =
-      "Ответ неверный, точность определения составляет " + result.end;
-    result.cssText = "color: red";
+    insert = "неверный";
+    color = "red";
   }
 
-  docAnswer.innerText = result.total;
-  docAnswer.style.cssText = result.cssText;
+  docAnswer.innerText = `Ответ: ${insert}, точность: ${res.accuracy}%.`;
+  docAnswer.style.cssText = `color: ${color}`;
 }
 
 // takes string from isDefinitionText and replace one underscored word to normal
