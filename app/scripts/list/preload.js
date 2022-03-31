@@ -28,7 +28,7 @@ function saveContent() {
 
 function presetDocument(content) {
   if (!content) {
-    alert("Data are empty");
+    alert("Content are empty");
     return;
   }
 

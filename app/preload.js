@@ -13,6 +13,7 @@ contextBridge.exposeInMainWorld("electron", {
   resetDefinitionText: () => assistant.replaceDefinitionText(),
   createHTMLTable: () => assistant.contentToHTMLTable(content),
   openList: () => openList(),
+  updateContent: () => updateContent(),
 });
 
 // preset first definition to document
@@ -23,4 +24,8 @@ window.addEventListener("DOMContentLoaded", () => {
 
 function openList() {
   ipcRenderer.send("open-list");
+}
+
+function updateContent(content) {
+  content = assistant.getData(path.join(__dirname, "./data/data.csv"));
 }
