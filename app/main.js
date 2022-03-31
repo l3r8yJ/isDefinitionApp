@@ -16,7 +16,8 @@ function createWindow() {
   });
 
   mainWindow.loadFile("index.html");
-  //mainWindow.webContents.openDevTools();
+  mainWindow.webContents.openDevTools();
+  return mainWindow;
 }
 
 function createListWindow() {
@@ -35,20 +36,26 @@ function createListWindow() {
   });
   listWindow.setTitle("Edit");
   listWindow.loadFile(path.join(__dirname, "./windows/list.html"));
-  //listWindow.webContents.openDevTools();
+  listWindow.webContents.openDevTools();
+  return listWindow;
 }
 
 ipcMain.on("open-list", () => {
-  createListWindow();
+  const listWindow = createListWindow();
 });
 
 app.whenReady().then(() => {
-  createWindow();
+  const mainWindow = createWindow();
 
   app.on("activate", () => {
     if (BrowserWindow.getAllWindows().length === 0) {
       createWindow();
     }
+  });
+
+  ipcMain.on("data-update", (event, arg) => {
+    event.sender.send("reply-on-update", { not_right: false });
+    mainWindow.webContents.send("data-updated", arg);
   });
 });
 

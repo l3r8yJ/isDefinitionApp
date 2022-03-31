@@ -13,6 +13,8 @@ contextBridge.exposeInMainWorld("electron", {
   resetDefinitionText: () => assistant.replaceDefinitionText(),
   createHTMLTable: () => assistant.contentToHTMLTable(content),
   openList: () => openList(),
+  updateContent: () => updateContent(),
+  onDataUpdate: () => onDataUpdate(),
 });
 
 // preset first definition to document
@@ -24,3 +26,10 @@ window.addEventListener("DOMContentLoaded", () => {
 function openList() {
   ipcRenderer.send("open-list");
 }
+
+ipcRenderer.on("data-updated", (event, arg) => {
+  console.log(arg);
+  contextBridge.exposeInMainWorld("electron", {
+    updatedContent: arg,
+  });
+});

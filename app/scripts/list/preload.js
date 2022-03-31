@@ -6,6 +6,7 @@ const content = assistant.getData(path.join(__dirname, "../../data/data.csv"));
 
 contextBridge.exposeInMainWorld("electron", {
   saveContent: () => saveContent(),
+  sendDataUpdate: () => sendDataUpdate(),
 });
 
 function saveContent() {
@@ -28,7 +29,7 @@ function saveContent() {
 
 function presetDocument(content) {
   if (!content) {
-    alert("Data are empty");
+    alert("Content are empty");
     return;
   }
 
@@ -45,3 +46,11 @@ function presetDocument(content) {
 window.addEventListener("DOMContentLoaded", () => {
   presetDocument(content);
 });
+
+function updateContent() {
+  return document.getElementById("text-area").value;
+}
+
+function sendDataUpdate() {
+  ipcRenderer.send("data-update", updateContent());
+}

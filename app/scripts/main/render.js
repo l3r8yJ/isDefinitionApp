@@ -4,7 +4,7 @@ const buttonHelp = document.getElementById("btn-help");
 const buttonEdit = document.getElementById("btn-edit");
 
 // data from bridgeContent
-const content = window.electron.content;
+let content = window.electron.content;
 
 // functions from bridgeContent
 const resetDefinition = window.electron.resetDefinition;
@@ -12,8 +12,8 @@ const resetDefinitionText = window.electron.resetDefinitionText;
 const createHTMLTable = window.electron.createHTMLTable;
 const openList = window.electron.openList;
 
-// here we compare string in id="user-input" with original
-// text in id="isDefinitionText"
+// here we compare string in id="user-input"
+// with original text
 const compareUserAndDefinition = (userInput) => {
   if (userInput === undefined || userInput.length === 0) {
     alert("Please enter definition text.");
@@ -86,6 +86,14 @@ function correctCheck(res) {
 function showWord() {
   // small overloading for compare arrays of words
 
+  const currentDefinitionText = getCurrentDefinitionText().split(" ");
+  let underscoredText = document
+    .getElementById("isDefinitionText")
+    .innerText.split(" ");
+  let underscoredTextWithWord = "";
+  let newWordIndex = Math.floor(Math.random() * currentDefinitionText.length);
+  let isChanged = false;
+
   if (Array.prototype.equals)
     console.warn(
       "Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there's a framework conflict or you've got double inclusions in your code."
@@ -110,14 +118,6 @@ function showWord() {
     }
     return true;
   };
-
-  const currentDefinitionText = getCurrentDefinitionText().split(" ");
-  let underscoredText = document
-    .getElementById("isDefinitionText")
-    .innerText.split(" ");
-  let underscoredTextWithWord = "";
-  let newWordIndex = Math.floor(Math.random() * currentDefinitionText.length);
-  isChanged = false;
 
   if (underscoredText.equals(currentDefinitionText)) {
     alert("All words are shown");
@@ -153,6 +153,14 @@ function getCurrentDefinitionText() {
   ];
 }
 
+async function refreshContent(content) {
+  try {
+    content = window.electron.updatedContent;
+  } catch (e) {
+    console.log(e);
+  }
+}
+
 buttonReset.addEventListener("click", () => {
   const input = document.getElementById("user-input");
   input.value = "";
@@ -165,7 +173,8 @@ buttonHelp.addEventListener("click", () => {
   showWord();
 });
 
-buttonEdit.addEventListener("click", (e) => {
+buttonEdit.addEventListener("click", async (e) => {
   e.preventDefault();
   openList();
+  await refreshContent(content);
 });
