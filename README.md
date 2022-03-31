@@ -2,7 +2,7 @@
 
 ## **IsDefinition** - is a simple app that makes it easy to memorize your definitions.
 
-#### Installation guide _(npm required!)_
+#### Build guide _(npm required)_
 
 > Clone git repository:
 >
