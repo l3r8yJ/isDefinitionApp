@@ -153,13 +153,14 @@ function getCurrentDefinitionText() {
   ];
 }
 
-async function refreshContent(content) {
-  try {
-    content = window.electron.updatedContent;
-  } catch (e) {
-    console.log(e);
-  }
-}
+// async function refreshContent(content) {
+//   try {
+//     content = window.electron.content;
+//     console.log(content);
+//   } catch (e) {
+//     console.log(e);
+//   }
+// }
 
 buttonReset.addEventListener("click", () => {
   const input = document.getElementById("user-input");
@@ -176,5 +177,11 @@ buttonHelp.addEventListener("click", () => {
 buttonEdit.addEventListener("click", async (e) => {
   e.preventDefault();
   openList();
-  await refreshContent(content);
+  async () => {
+    try {
+      content = window.electron.refreshContent;
+    } catch (error) {
+      console.log(error);
+    }
+  };
 });
