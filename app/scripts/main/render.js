@@ -45,18 +45,6 @@ const compareUserAndDefinition = (userInput) => {
   return result;
 };
 
-// comparing
-buttonAnswer.addEventListener("click", () => {
-  const userInput = document.getElementById("user-input").value;
-  const currentDefinitionText =
-    document.getElementById("isDefinitionText").innerText;
-
-  if (currentDefinitionText.length === 0) throw new Error("Empty definition.");
-
-  const res = compareUserAndDefinition(userInput, currentDefinitionText);
-  correctCheck(res);
-});
-
 function correctCheck(res) {
   const docAnswer = document.getElementById("answer");
   let insert, color;
@@ -76,8 +64,6 @@ function correctCheck(res) {
 
 // takes string from isDefinitionText and replace one underscored word to normal
 function showWord() {
-  // small overloading for compare arrays of words
-
   const currentDefinitionText = getCurrentDefinitionText().split(" ");
   let underscoredText = document
     .getElementById("isDefinitionText")
@@ -86,12 +72,34 @@ function showWord() {
   let newWordIndex = Math.floor(Math.random() * currentDefinitionText.length);
   let isChanged = false;
 
-  if (Array.prototype.equals)
-    console.warn(
-      "Overriding existing Array.prototype.equals. Possible causes: New API defines the method, there's a framework conflict or you've got double inclusions in your code."
-    );
   // attach the .equals method to Array's prototype to call it on any array
-  Array.prototype.equals = function (array) {
+  arrayEqualOverload();
+
+  if (underscoredText.equals(currentDefinitionText)) {
+    alert("All words are shown");
+    return;
+  }
+
+  while (!isChanged) {
+    isChanged = underscoredText[newWordIndex].search("_") !== -1 ? true : false;
+    if (isChanged) {
+      underscoredText[newWordIndex] = currentDefinitionText[newWordIndex];
+    } else {
+      newWordIndex = Math.floor(Math.random() * currentDefinitionText.length);
+    }
+  }
+
+  underscoredText.forEach((element) => {
+    underscoredTextWithWord +=
+      element !== underscoredText[-1] ? `${element} ` : `${element}`;
+  });
+
+  document.getElementById("isDefinitionText").innerText =
+    underscoredTextWithWord;
+}
+
+function arrayEqualOverload() {
+  return (Array.prototype.equals = function (array) {
     // if the other array is a falsy value, return
     if (!array) return false;
 
@@ -109,32 +117,7 @@ function showWord() {
       }
     }
     return true;
-  };
-
-  if (underscoredText.equals(currentDefinitionText)) {
-    alert("All words are shown");
-    return;
-  }
-
-  while (!isChanged) {
-    if (underscoredText[newWordIndex].search("_") !== -1) {
-      underscoredText[newWordIndex] = currentDefinitionText[newWordIndex];
-      isChanged = true;
-    } else {
-      newWordIndex = Math.floor(Math.random() * currentDefinitionText.length);
-    }
-  }
-
-  underscoredText.forEach((element) => {
-    if (element !== underscoredText[-1]) {
-      underscoredTextWithWord += element + " ";
-    } else {
-      underscoredTextWithWord += element;
-    }
   });
-
-  document.getElementById("isDefinitionText").innerText =
-    underscoredTextWithWord;
 }
 
 function getCurrentDefinitionText() {
@@ -145,19 +128,20 @@ function getCurrentDefinitionText() {
   ];
 }
 
-// async function refreshContent(content) {
-//   try {
-//     content = window.electron.content;
-//     console.log(content);
-//   } catch (e) {
-//     console.log(e);
-//   }
-// }
+// comparing
+buttonAnswer.addEventListener("click", () => {
+  const userInput = document.getElementById("user-input").value;
+  const currentDefinitionText =
+    document.getElementById("isDefinitionText").innerText;
+
+  if (currentDefinitionText.length === 0) throw new Error("Empty definition.");
+
+  const res = compareUserAndDefinition(userInput, currentDefinitionText);
+  correctCheck(res);
+});
 
 buttonReset.addEventListener("click", () => {
-  const input = document.getElementById("user-input");
-  input.value = "";
-
+  document.getElementById("user-input").value = "";
   resetDefinition();
   resetDefinitionText();
 });

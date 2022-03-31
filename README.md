@@ -14,6 +14,10 @@
 >
 > - `cd isDefinitionApp`
 >
+> Install electron:
+>
+> - `npm i electron --dev --save`
+>
 > Run make:
 >
 > - `npm run make`
