@@ -65,7 +65,7 @@ function correctCheck(res) {
 // takes string from isDefinitionText and replace one underscored word to normal
 function showWord() {
   const currentDefinitionText = getCurrentDefinitionText().split(" ");
-  let underscoredText = document
+  const underscoredText = document
     .getElementById("isDefinitionText")
     .innerText.split(" ");
   let underscoredTextWithWord = "";
