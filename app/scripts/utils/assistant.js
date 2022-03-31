@@ -33,46 +33,45 @@ const assistant = {
     let html = "";
 
     content.forEach((line) => {
-      html += "<li>" + line + "</li>";
+      html += `<li>${line}</li>`;
     });
 
     document.getElementById("list").innerHTML = html;
   },
 
   pushDefinitionToDocument(content) {
+    const parsedContent = this.parseToDefinitionAndText(content);
     const definition = document.getElementById("isDefinition");
     const definitionText = document.getElementById("isDefinitionText");
-    const defs = Object.keys(this.parseToDefinitionAndText(content));
-    const defsText = Object.values(this.parseToDefinitionAndText(content));
+    const defs = Object.keys(parsedContent);
     const index = Math.floor(Math.random() * defs.length);
 
     definition.innerText = defs[index];
-    definitionText.innerText = defsText[index];
+    definitionText.innerText = Object.values(parsedContent)[index];
   },
 
   getData(path) {
     try {
       return fs.readFileSync(path, "utf8").toString().split("\n");
     } catch (error) {
-      if (error.code === "ENOENT") console.log("File not found!");
+      console.log(error);
     }
   },
 
   // correctly underscores the isDefinitionText
   replaceDefinitionText() {
     const docText = document.getElementById("isDefinitionText");
-    let current = document.getElementById("isDefinitionText").innerText;
+    const currentText = document
+      .getElementById("isDefinitionText")
+      .innerText.split(" ");
+
     let underscoredText = "";
 
-    current = current.split(" ");
-
-    current.forEach((element) => {
-      if (element !== current[-1]) {
-        underscoredText += "_".repeat(element.length);
-        underscoredText += " ";
-      } else {
-        underscoredText += "_".repeat(element.length);
-      }
+    currentText.forEach((element) => {
+      underscoredText +=
+        element !== currentText[-1]
+          ? `${"_".repeat(element.length)} `
+          : "_".repeat(element.length);
     });
     // string type of ___ ____ ___
     docText.innerText = underscoredText;
