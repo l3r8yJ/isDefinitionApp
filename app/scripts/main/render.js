@@ -26,11 +26,6 @@ const compareUserAndDefinition = (userInput) => {
   const PERCENT_PER_SYMBOL = PERCENTS / currentDefinitionText.length;
   let accuracy = 0.0;
 
-  if (userInput.length > currentDefinitionText.length) {
-    alert("Слишком большой объем");
-    return;
-  }
-
   for (let i = 0; i < currentDefinitionText.length; i++) {
     if (currentDefinitionText[i] === userInput[i])
       accuracy += PERCENT_PER_SYMBOL;
@@ -135,17 +130,20 @@ function getCurrentDefinitionText() {
 // comparing
 buttonCheck.addEventListener("click", () => {
   const userInput = document.getElementById("user-input").value;
+  const definitionText = document.getElementById("isDefinitionText");
   const currentDefinitionText =
     document.getElementById("isDefinitionText").innerText;
 
   if (currentDefinitionText.length === 0) throw new Error("Empty definition.");
 
+  definitionText.innerText = getCurrentDefinitionText();
   const res = compareUserAndDefinition(userInput, currentDefinitionText);
   correctCheck(res);
 });
 
 buttonReset.addEventListener("click", () => {
   document.getElementById("user-input").value = "";
+  document.getElementById("answer").innerText = "";
   resetDefinition();
   resetDefinitionText();
 });
@@ -160,6 +158,6 @@ buttonEdit.addEventListener("click", async (e) => {
 });
 
 buttonShowAnswer.addEventListener("click", () => {
-  const userInput = document.getElementById("user-input");
-  userInput.value = getCurrentDefinitionText();
+  const userInput = document.getElementById("isDefinitionText");
+  userInput.innerText = getCurrentDefinitionText();
 });
