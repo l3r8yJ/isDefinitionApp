@@ -29,4 +29,4 @@
 ## Controls 
 > `Enter` - for check your input. 
 > 
-> `Alt` or `Option` for next_(random)_ definition.
+> `Alt` or `Option` for next _(random)_ definition.
