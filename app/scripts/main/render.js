@@ -1,10 +1,11 @@
-const buttonAnswer = document.getElementById("btn-answer");
+const buttonCheck = document.getElementById("btn-check");
 const buttonReset = document.getElementById("btn-reset");
 const buttonHelp = document.getElementById("btn-help");
 const buttonEdit = document.getElementById("btn-edit");
+const buttonShowAnswer = document.getElementById("btn-show-answer");
 
 // data from bridgeContent
-let content = window.electron.content;
+const content = window.electron.content;
 
 // functions from bridgeContent
 const resetDefinition = window.electron.resetDefinition;
@@ -58,7 +59,7 @@ function correctCheck(res) {
     color = "red";
   }
 
-  docAnswer.innerText = `Ответ: ${insert}, точность: ${res.accuracy}%.`;
+  docAnswer.innerText = `Ответ ${insert}. Точность: ${res.accuracy}%.`;
   docAnswer.style.cssText = `color: ${color}`;
 }
 
@@ -129,7 +130,7 @@ function getCurrentDefinitionText() {
 }
 
 // comparing
-buttonAnswer.addEventListener("click", () => {
+buttonCheck.addEventListener("click", () => {
   const userInput = document.getElementById("user-input").value;
   const currentDefinitionText =
     document.getElementById("isDefinitionText").innerText;
@@ -153,4 +154,9 @@ buttonHelp.addEventListener("click", () => {
 buttonEdit.addEventListener("click", async (e) => {
   e.preventDefault();
   sendMessageToOpenList();
+});
+
+buttonShowAnswer.addEventListener("click", () => {
+  const userInput = document.getElementById("user-input");
+  userInput.value = getCurrentDefinitionText();
 });
