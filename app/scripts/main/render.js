@@ -70,7 +70,7 @@ function showWord() {
     .getElementById("isDefinitionText")
     .innerText.split(" ");
   let underscoredTextWithWord = "";
-  let newWordIndex = Math.floor(Math.random() * currentDefinitionText.length);
+  let wordIndexToReplace = 0;
   let isChanged = false;
 
   // attach the .equals method to Array's prototype to call it on any array
@@ -82,11 +82,14 @@ function showWord() {
   }
 
   while (!isChanged) {
-    isChanged = underscoredText[newWordIndex].search("_") !== -1 ? true : false;
+    isChanged =
+      underscoredText[wordIndexToReplace].search("_") !== -1 ? true : false;
     if (isChanged) {
-      underscoredText[newWordIndex] = currentDefinitionText[newWordIndex];
+      underscoredText[wordIndexToReplace] =
+        currentDefinitionText[wordIndexToReplace];
     } else {
       newWordIndex = Math.floor(Math.random() * currentDefinitionText.length);
+      wordIndexToReplace += 1;
     }
   }
 
