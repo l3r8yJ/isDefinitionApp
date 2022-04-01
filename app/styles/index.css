@@ -32,6 +32,9 @@ body {
   background: #22d66a;
   border-radius: 16px;
   border: 0px solid;
+  position: relative;
+  top: 60%;
+  left: 25%;
 }
 .btn-check:hover,
 .btn-reset:hover {
@@ -69,6 +72,8 @@ body {
   background: #ff6f00;
   border-radius: 16px;
   border: 0px solid;
+  position: relative;
+  left: 15%;
 }
 .btn-help:hover {
   background: #cccdcf;
@@ -87,6 +92,8 @@ body {
   background: #ff6f00;
   border-radius: 16px;
   border: 0px solid;
+  position: relative;
+  left: 20%;
 }
 .btn-answer:hover {
   background: #cccdcf;
@@ -102,9 +109,12 @@ body {
   text-decoration: none;
   padding: 8px 50px;
   color: #ffffff;
-  background: #22d66a;
+  background: #628972;
   border-radius: 16px;
   border: 0px solid;
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
 }
 .btn-edit:hover {
   background: #cccdcf;
