@@ -25,3 +25,8 @@
 > - `cd out/your/folder/`
 >
 > There will be an executable file in your os folder
+
+## Controls 
+> `Enter` - for check your input. 
+> 
+> `Alt` or `Option` for next_(random)_ definition.
