@@ -3,6 +3,7 @@ const buttonReset = document.getElementById("btn-reset");
 const buttonHelp = document.getElementById("btn-help");
 const buttonEdit = document.getElementById("btn-edit");
 const buttonShowAnswer = document.getElementById("btn-show-answer");
+const userInput = document.getElementById("user-input");
 
 // data from bridgeContent
 const content = window.electron.content;
@@ -15,10 +16,10 @@ const sendMessageToOpenList = window.electron.openList;
 
 // here we compare string in id="user-input"
 // with original text
-const compareUserAndDefinition = (userInput) => {
+function compareUserAndDefinition(userInput) {
   if (userInput === undefined || userInput.length === 0) {
     alert("Please enter definition text.");
-    return;
+    return undefined;
   }
 
   const currentDefinitionText = getCurrentDefinitionText();
@@ -39,9 +40,9 @@ const compareUserAndDefinition = (userInput) => {
   };
   console.log(accuracy);
   return result;
-};
+}
 
-function correctCheck(res) {
+function showResultToDocument(res) {
   const docAnswer = document.getElementById("answer");
   let insert, color;
 
@@ -129,23 +130,17 @@ function getCurrentDefinitionText() {
 
 // comparing
 buttonCheck.addEventListener("click", () => {
-  const userInput = document.getElementById("user-input").value;
-  const definitionText = document.getElementById("isDefinitionText");
-  const currentDefinitionText =
-    document.getElementById("isDefinitionText").innerText;
+  checkGlobal();
+});
 
-  if (currentDefinitionText.length === 0) throw new Error("Empty definition.");
-
-  definitionText.innerText = getCurrentDefinitionText();
-  const res = compareUserAndDefinition(userInput, currentDefinitionText);
-  correctCheck(res);
+window.addEventListener("keydown", (logKey) => {
+  console.log(logKey.key);
+  logKey.key === "Alt" ? resetDefinitionGlobal() : false;
+  logKey.key === "Enter" ? checkGlobal() : false;
 });
 
 buttonReset.addEventListener("click", () => {
-  document.getElementById("user-input").value = "";
-  document.getElementById("answer").innerText = "";
-  resetDefinition();
-  resetDefinitionText();
+  resetDefinitionGlobal();
 });
 
 buttonHelp.addEventListener("click", () => {
@@ -161,3 +156,29 @@ buttonShowAnswer.addEventListener("click", () => {
   const userInput = document.getElementById("isDefinitionText");
   userInput.innerText = getCurrentDefinitionText();
 });
+
+function checkGlobal() {
+  const userInput = document.getElementById("user-input").value;
+  const definitionText = document.getElementById("isDefinitionText");
+  const currentDefinitionText =
+    document.getElementById("isDefinitionText").innerText;
+
+  if (currentDefinitionText.length === 0) {
+    return;
+  }
+
+  const res = compareUserAndDefinition(userInput, currentDefinitionText);
+  if (res !== undefined) {
+    definitionText.innerText = getCurrentDefinitionText();
+    showResultToDocument(res);
+  }
+}
+
+function resetDefinitionGlobal() {
+  const userInput = document.getElementById("user-input");
+  userInput.value = "";
+
+  document.getElementById("answer").innerText = "";
+  resetDefinition();
+  resetDefinitionText();
+}
