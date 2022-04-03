@@ -49,8 +49,7 @@ function showResultToDocument(res) {
   if (res.isCorrect) {
     insert = "верный";
     color = "green";
-  }
-  if (!res.isCorrect) {
+  } else {
     insert = "неверный";
     color = "red";
   }
@@ -84,7 +83,6 @@ function showWord() {
       underscoredText[wordIndexToReplace] =
         currentDefinitionText[wordIndexToReplace];
     } else {
-      newWordIndex = Math.floor(Math.random() * currentDefinitionText.length);
       wordIndexToReplace += 1;
     }
   }
@@ -149,7 +147,7 @@ buttonHelp.addEventListener("click", () => {
 
 buttonEdit.addEventListener("click", async (e) => {
   e.preventDefault();
-  sendMessageToOpenList();
+  await sendMessageToOpenList();
 });
 
 buttonShowAnswer.addEventListener("click", () => {
