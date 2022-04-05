@@ -9,13 +9,13 @@ function createWindow() {
       preload: path.join(__dirname, "./preload.js"),
       nodeIntegration: true,
       contextIsolation: true,
-      // enablePremoteMode: true,
       enableRemoteModule: true,
       nativeWindowOpen: false,
     },
   });
 
   mainWindow.loadFile("index.html");
+  mainWindow.webContents.openDevTools();
   return mainWindow;
 }
 
