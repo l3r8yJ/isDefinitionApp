@@ -34,6 +34,7 @@ function presetDocument(content) {
   }
 
   const tArea = document.getElementById("text-area");
+
   let text = "";
 
   content.forEach((element) => {

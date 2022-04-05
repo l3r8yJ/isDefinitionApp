@@ -49,8 +49,7 @@ function showResultToDocument(res) {
   if (res.isCorrect) {
     insert = "верный";
     color = "green";
-  }
-  if (!res.isCorrect) {
+  } else {
     insert = "неверный";
     color = "red";
   }
@@ -84,7 +83,6 @@ function showWord() {
       underscoredText[wordIndexToReplace] =
         currentDefinitionText[wordIndexToReplace];
     } else {
-      newWordIndex = Math.floor(Math.random() * currentDefinitionText.length);
       wordIndexToReplace += 1;
     }
   }
@@ -149,12 +147,12 @@ buttonHelp.addEventListener("click", () => {
 
 buttonEdit.addEventListener("click", async (e) => {
   e.preventDefault();
-  sendMessageToOpenList();
+  await sendMessageToOpenList();
 });
 
 buttonShowAnswer.addEventListener("click", () => {
-  const userInput = document.getElementById("isDefinitionText");
-  userInput.innerText = getCurrentDefinitionText();
+  const definitionText = document.getElementById("isDefinitionText");
+  definitionText.innerText = getCurrentDefinitionText();
 });
 
 function checkGlobal() {
@@ -163,9 +161,7 @@ function checkGlobal() {
   const currentDefinitionText =
     document.getElementById("isDefinitionText").innerText;
 
-  if (currentDefinitionText.length === 0) {
-    return;
-  }
+  if (currentDefinitionText.length === 0) return;
 
   const res = compareUserAndDefinition(userInput, currentDefinitionText);
   if (res !== undefined) {
@@ -175,10 +171,9 @@ function checkGlobal() {
 }
 
 function resetDefinitionGlobal() {
-  const userInput = document.getElementById("user-input");
-  userInput.value = "";
-
+  document.getElementById("user-input").value = "";
   document.getElementById("answer").innerText = "";
+
   resetDefinition();
   resetDefinitionText();
 }
