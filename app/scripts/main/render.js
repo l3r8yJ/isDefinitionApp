@@ -151,8 +151,8 @@ buttonEdit.addEventListener("click", async (e) => {
 });
 
 buttonShowAnswer.addEventListener("click", () => {
-  const userInput = document.getElementById("isDefinitionText");
-  userInput.innerText = getCurrentDefinitionText();
+  const definitionText = document.getElementById("isDefinitionText");
+  definitionText.innerText = getCurrentDefinitionText();
 });
 
 function checkGlobal() {
@@ -161,9 +161,7 @@ function checkGlobal() {
   const currentDefinitionText =
     document.getElementById("isDefinitionText").innerText;
 
-  if (currentDefinitionText.length === 0) {
-    return;
-  }
+  if (currentDefinitionText.length === 0) return;
 
   const res = compareUserAndDefinition(userInput, currentDefinitionText);
   if (res !== undefined) {
@@ -173,10 +171,9 @@ function checkGlobal() {
 }
 
 function resetDefinitionGlobal() {
-  const userInput = document.getElementById("user-input");
-  userInput.value = "";
-
+  document.getElementById("user-input").value = "";
   document.getElementById("answer").innerText = "";
+
   resetDefinition();
   resetDefinitionText();
 }

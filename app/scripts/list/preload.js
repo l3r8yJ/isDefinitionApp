@@ -34,10 +34,9 @@ function presetDocument(content) {
   }
 
   const tArea = document.getElementById("text-area");
-  let text = "";
 
-  content.forEach((element) => {
-    text += element + "\n";
+  const text = content.forEach((element) => {
+    yield element + "\n";
   });
 
   tArea.value = text;
